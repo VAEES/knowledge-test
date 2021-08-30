@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  knowledge-test-api:
+    container_name: knowledge-test-api
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - knowledge-test-db
+    environment:
+      - TYPEORM_CONNECTION=mysql
+      - TYPEORM_USERNAME=$KT_DB_USERNAME
+      - TYPEORM_PASSWORD=$KT_DB_PASSWORD
+      - TYPEORM_DATABASE=$KT_DB_NAME
+      - TYPEORM_SYNCHRONIZE=$KT_DB_SYNCHRONIZE
+      - TYPEORM_LOGGING=$KT_API_LOGGING
+      - SENTRY_KEY=$KT_SENTRY_KEY
+      - TYPEORM_HOST=$KT_DB_HOSTNAME
+      - TYPEORM_PORT=$KT_DB_PORT
+      - TYPEORM_ENTITIES="build/domain/entities/*.js"
+      - TYPEORM_ENTITIES_DIR="build/domain/entities/"
+      - TYPEORM_MIGRATIONS_DIR="build/infra/migrations/"
+      - TYPEORM_SUBSCRIBERS_DIR="build/infra/subscriptions/"
+
+  knowledge-test-db:
+    container_name: knowledge-test-db
+    command: --default-authentication-plugin=mysql_native_password
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_PASSWORD=$KT_DB_PASSWORD
+      - MYSQL_USER=$KT_DB_USERNAME
+      - MYSQL_DATABASE=$KT_DB_NAME
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - knowledge-test-db:/var/lib/mysql
+
+volumes:
+  knowledge-test-db:

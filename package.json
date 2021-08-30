@@ -1,32 +1,52 @@
 {
-  "name": "javascript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/main/server.js",
-  "scripts": {
-    "dev": "nodemon",
-    "test": "jest --passWithNoTests --silent --runInBand",
-    "test:unit": "npm test -- --watch -c jest-unit.config.js",
-    "test:integration": "npm test -- --watch -c jest-integration.config.js",
-    "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^7.22.0",
-    "eslint-config-google": "^0.14.0",
-    "faker": "^5.5.1",
-    "git-commit-msg-linter": "^3.1.0",
-    "husky": "4.2.5",
-    "jest": "^26.6.3",
-    "lint-staged": "^10.5.4",
-    "nodemon": "^2.0.7"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "sqlite": "^4.0.19",
-    "sqlite3": "^5.0.2"
-  }
+   "name": "knowledge-test-substitute",
+   "version": "1.0.0",
+   "description": "",
+   "main": "./build/api/app.js",
+   "scripts": {
+      "dev": "./dev.sh",
+      "prod": "./prod.sh",
+      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+      "migration-generate": "node_modules/.bin/ts-node-dev node_modules/typeorm/cli.js migration:create -n",
+      "build": "rm -rf build/ && prettier --write src/ && tsc",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "ts-node build/api/app.js"
+   },
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "@sentry/node": "^6.11.0",
+      "@types/axios": "^0.14.0",
+      "@types/express": "^4.17.13",
+      "@types/morgan": "^1.9.3",
+      "axios": "^0.21.1",
+      "body-parser": "^1.19.0",
+      "express": "^4.17.1",
+      "fluentvalidation-ts": "^2.2.2",
+      "http-status-codes": "^2.1.4",
+      "inversify": "^5.1.1",
+      "inversify-express-utils": "^6.3.2",
+      "lodash": "^4.17.21",
+      "morgan": "^1.10.0",
+      "mysql": "^2.18.1",
+      "nodemon": "^2.0.12",
+      "pg": "^8.7.1",
+      "postgres": "^1.0.2",
+      "reflect-metadata": "^0.1.13",
+      "sqlite": "^4.0.23",
+      "sqlite3": "^5.0.2",
+      "swagger-express-ts": "^1.1.0",
+      "swagger-ui-dist": "^4.0.0-beta.4",
+      "ts-node": "^10.2.0",
+      "typeorm": "0.2.36",
+      "typescript": "^4.3.5"
+   },
+   "devDependencies": {
+      "@types/lodash": "^4.14.172",
+      "@types/node": "^8.0.29",
+      "did-you-mean": "0.0.1",
+      "husky": "^7.0.2",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   }
 }

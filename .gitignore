@@ -1,2 +1,5 @@
 node_modules
 coverage
+*.sq3
+ormconfig-docker.env
+build
